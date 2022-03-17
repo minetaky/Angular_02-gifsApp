@@ -9,6 +9,8 @@ export class GifsService {
   private _historial:  string[] = [];
   private _apiKey: string = 'Bh8qhx85rQR6tbRNVoO7h32OOCOgyfsv';
 
+  public resultados: any[] = [];
+
   get historial(){
     return [...this._historial];
   }
@@ -38,9 +40,10 @@ buscarGifs( query: string ){
    const data = await resp.json();
    console.log( data ); */
 
-   this._http.get('https://api.giphy.com/v1/gifs/search?api_key=Bh8qhx85rQR6tbRNVoO7h32OOCOgyfsv&q=como%20conoci%20a%20tu%20madre&limit=10')
-   .subscribe( resp => {
+   this._http.get(`https://api.giphy.com/v1/gifs/search?api_key=Bh8qhx85rQR6tbRNVoO7h32OOCOgyfsv&q=${ query }&limit=10`)
+   .subscribe( (resp: any ) => {
      console.log( resp );
+     this.resultados = resp.data;
    });
 
   }
