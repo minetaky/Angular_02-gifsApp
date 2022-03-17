@@ -4,9 +4,12 @@
     </h3>
     <hr class="text-white">
     <div class="list-group list-reset">
+      
       <a href="#"
-        class="list-group-item list-group-item-action ">
-        dashboard
+        class="list-group-item list-group-item-action "
+        *ngFor="let busquedas of historial"
+        >
+        {{ busquedas | titlecase }}
       </a>
     </div>
   </div>
