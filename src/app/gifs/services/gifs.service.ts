@@ -17,7 +17,7 @@ export class GifsService {
   }
 
   constructor( private _http: HttpClient ){
-
+    this._historial = JSON.parse( localStorage.getItem('historial')! ) || [];
   }
 
 buscarGifs( query: string ){
@@ -26,6 +26,9 @@ buscarGifs( query: string ){
     if( !this._historial.includes( query ) ){
       this._historial.unshift( query ); //para que Inserte al principio del arreglo
       this._historial = this.historial.splice(0,10);
+
+      localStorage.setItem('historial', JSON.stringify( this._historial) );
+
     }
 
     //Forma 1 con promesas
