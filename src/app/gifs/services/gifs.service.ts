@@ -16,8 +16,10 @@ export class GifsService {
     return [...this._historial];
   }
 
+
   constructor( private _http: HttpClient ){
     this._historial = JSON.parse( localStorage.getItem('historial')! ) || [];
+    this.resultados = JSON.parse( localStorage.getItem('resultados')! ) || [];
   }
 
 buscarGifs( query: string ){
@@ -28,7 +30,7 @@ buscarGifs( query: string ){
       this._historial = this.historial.splice(0,10);
 
       localStorage.setItem('historial', JSON.stringify( this._historial) );
-
+      
     }
 
     //Forma 1 con promesas
@@ -48,6 +50,7 @@ buscarGifs( query: string ){
    .subscribe( (resp ) => {
      console.log( resp.data );
      this.resultados = resp.data;
+     localStorage.setItem('resultados', JSON.stringify( this.resultados) );
    });
 
   }
